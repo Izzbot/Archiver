@@ -6,7 +6,9 @@ class URL(models.Model):
     final_url = models.CharField(max_length=1000)
     status = models.CharField(max_length=4)
     title = models.CharField(max_length=500)
-    def publish(self):
+    collected_date = models.DateTimeField(default=timezone.now)
+
+    def collect(self):
         self.save()
 
     def __str__(self):

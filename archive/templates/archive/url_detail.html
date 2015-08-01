@@ -1,0 +1,23 @@
+{% extends "archive/base.html" %}
+
+{% block content %}
+
+<table class="url_table">
+    <tr>
+        <th class="url_table_header">Title</th>
+        <th class="url_table_header">Status</th>
+        <th class="url_table_header">Initial</th>
+        <th class="url_table_header">Final</th>
+        <th class="url_table_header">Accessed</th>
+    </tr>
+    <tr class="url_table_row">
+        <td>{{ url.title }}</td>
+        <td>{{ url.status }}</td>
+        <td>{{ url.init_url }}</td>
+        <td>{{ url.final_url }}</td>
+        <td>{{ url.collected_date }}</td>
+    </tr>
+</table>
+
+<p><a href="{% url "url_delete" pk=url.pk %}">DELETE</a></p>
+{% endblock %}
