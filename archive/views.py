@@ -17,27 +17,40 @@ def url_new(request):
     if request.method == "POST":
         form = URLForm(request.POST)
         if form.is_valid():
-            url = form.save(commit=false)
+            url = form.save(commit=False)
             url.collected_date = timezone.now()
 
             # connect up and fetch the website
-            req = requests.get(url.init_url)
+            try:
+                req = requests.request('GET', url.init_url)
+            except:
+                # if the connection breaks
+                url.status = '404'
+                url.title = ''
+                url.final_url = url.init_url
+                url.save()
+                url = get_object_or_404(URL, pk=url.pk)
+                return redirect('archive.views.url_detail', pk=url.pk)
+
+            # assign data
             url.status = req.status_code
             url.final_url = req.url
 
             # Use bs4 to parse the data
-            data = req.read()
-            soup = BeautifulSoup(data)
-            url.title = soup.title.string
+            soup = BeautifulSoup(req.text)
+            if not soup.title.string:
+                url.title = ''
+            else:
+                url.title = soup.title.string
+
             url.save()
-            url = get_object_or_404(URL, pk=pk)
+            url = get_object_or_404(URL, pk=url.pk)
             return redirect('archive.views.url_detail', pk=url.pk)
     else:
-        url = URLForm()
+        form = URLForm()
     return render(request, 'archive/url_new.html', {'form': form})
 
 def url_delete(request, pk):
     url = get_object_or_404(URL, pk=pk)
     url.delete()
-    urls = URL.objects.order_by('collected_date')
-    return redirect('archive.views.url_detail', {'urls': urls})
+    return redirect('archive.views.url_list')
