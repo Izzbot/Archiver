@@ -10,6 +10,8 @@
         <th class="url_table_header">Initial</th>
         <th class="url_table_header">Final</th>
         <th class="url_table_header">Accessed</th>
+        <th class="url_table_header">Wayback</th>
+        <th class="url_table_header">Archived</th>
     </tr>
     {% for url in urls %}
 
@@ -20,6 +22,9 @@
         <td>{{ url.init_url }}</td>
         <td>{{ url.final_url }}</td>
         <td>{{ url.collected_date }}</td>
+        <td>{{ url.wb_url }}</td>
+        <td>{{ url.wb_date }}</td>
+
     </tr>
     {% endfor %}
 </table>

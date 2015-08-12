@@ -7,6 +7,8 @@ class URL(models.Model):
     status = models.CharField(max_length=4)
     title = models.CharField(max_length=500)
     collected_date = models.DateTimeField(default=timezone.now)
+    wback_url = models.URLField(max_length=1000, default='')
+    wback_date = models.DateTimeField(default=timezone.now)
 
     def collect(self):
         self.save()

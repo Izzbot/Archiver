@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'archive',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,5 +106,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+AWS_ACCESS_KEY_ID ='AKIAIQF6DDUTXXA4O5AA'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'izzy-lab'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+STATIC_URL = 'http://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME + '/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

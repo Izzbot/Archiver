@@ -4,6 +4,7 @@ from .models import URL
 from .forms import URLForm
 from bs4 import BeautifulSoup
 import requests
+# import wayback
 
 def url_list(request):
     urls = URL.objects.order_by('collected_date')
@@ -27,6 +28,8 @@ def url_new(request):
                 # if the connection breaks
                 url.status = '404'
                 url.title = ''
+                url.wback_url = ''
+                url.wback_date = ''
                 url.final_url = url.init_url
                 url.save()
                 url = get_object_or_404(URL, pk=url.pk)
@@ -38,10 +41,19 @@ def url_new(request):
 
             # Use bs4 to parse the data
             soup = BeautifulSoup(req.text)
-            if not soup.title.string:
-                url.title = ''
-            else:
+            if soup is not None:
                 url.title = soup.title.string
+            else:
+                url.title = ''
+
+            # Use wayback to grab the data
+            try:
+                wb_json = requests.request('GET', 'http://timetravel.mementoweb.org/api/json/' + timezone.now().strftime('%Y%m%d') + url.final_url)
+                url.wback_url = wb_json.mementos.closest.uri[0]
+                url.wback_date = wb_json.mementos.closest.datetime
+            except:
+                url.wback_url = ''
+                url.wback_date = timezone.now()
 
             url.save()
             url = get_object_or_404(URL, pk=url.pk)
