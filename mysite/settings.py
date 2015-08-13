@@ -113,4 +113,6 @@ AWS_ACCESS_KEY_ID = creds.AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY = creds.AWS_SECRET_ACCESS_KEY
 
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorag
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+STATIC_URL = 'http://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME + '/'
