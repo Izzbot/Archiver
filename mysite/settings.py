@@ -1,3 +1,5 @@
+from . import creds
+
 """
 Django settings for mysite project.
 
@@ -20,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'si&w51aw(_0!hde_8jk$&a1k*gg9bdr^l4heoi@i*23)bj57p$'
+SECRET_KEY = creds.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,8 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'archive',      
-	'USER': 'archiver',         
-	'PASSWORD': 'notmypassword',
+	'USER': creds.DB_USER,
+	'PASSWORD': creds.DB_PASS,
 	'HOST': 'localhost',
 	'PORT': '',
 
@@ -106,9 +108,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-AWS_ACCESS_KEY_ID ='AKIAIQF6DDUTXXA4O5AA'
-AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'izzy-lab'
+AWS_ACCESS_KEY_ID = creds.AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY = creds.AWS_SECRET_ACCESS_KEY
 
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'

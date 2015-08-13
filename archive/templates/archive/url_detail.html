@@ -2,26 +2,29 @@
 
 {% block content %}
 
-<table class="url_table">
-    <tr>
-        <th class="url_table_header">Title</th>
-        <th class="url_table_header">Status</th>
-        <th class="url_table_header">Initial</th>
-        <th class="url_table_header">Final</th>
-        <th class="url_table_header">Accessed</th>
-        <th class="url_table_header">Wayback</th>
-        <th class="url_table_header">Archived</th>
-    </tr>
-    <tr class="url_table_row">
-        <td>{{ url.title }}</td>
-        <td>{{ url.status }}</td>
-        <td>{{ url.init_url }}</td>
-        <td>{{ url.final_url }}</td>
-        <td>{{ url.collected_date }}</td>
-        <td>{{ url.wb_url }}</td>
-        <td>{{ url.wb_date }}</td>
-    </tr>
-</table>
+<p>
+    <h2>Title:</h2>
+    {{ url.title }}
+</p>
+<p>
+    <h2>Status:</h2>
+    {{ url.status }}
+</p>
+<p>
+    <h2>Initial:</h2>
+    {{ url.init_url }}
+</p>
+<p>
+    <h2>Final:</h2>
+    {{ url.final_url }}
+</p>
+<p>
+    <h2>Wayback on {{ url.wb_date }}:</h2>
+    {{ url.wb_url }}
+</p>
+<p>
+    collected on {{ url.collected_date }}
+</p>
 
 <p><a href="{% url "url_delete" pk=url.pk %}">DELETE</a></p>
 {% endblock %}
