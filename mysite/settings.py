@@ -108,17 +108,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-<<<<<<< HEAD
-=======
-AWS_ACCESS_KEY_ID ='xxx'
-AWS_SECRET_ACCESS_KEY = 'xxx'
->>>>>>> 8ee1e33f9a565370969c5bbbb10bd876469da212
 AWS_STORAGE_BUCKET_NAME = 'izzy-lab'
 AWS_ACCESS_KEY_ID = creds.AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY = creds.AWS_SECRET_ACCESS_KEY
 
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-STATIC_URL = 'http://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME + '/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorag
