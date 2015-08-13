@@ -108,6 +108,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+<<<<<<< HEAD
+=======
+AWS_ACCESS_KEY_ID ='xxx'
+AWS_SECRET_ACCESS_KEY = 'xxx'
+>>>>>>> 8ee1e33f9a565370969c5bbbb10bd876469da212
 AWS_STORAGE_BUCKET_NAME = 'izzy-lab'
 AWS_ACCESS_KEY_ID = creds.AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY = creds.AWS_SECRET_ACCESS_KEY
